@@ -1,0 +1,52 @@
+{
+  "name": "piral-cli-bun",
+  "version": "1.0.0",
+  "description": "Provides debug and build capabilities for pilets and Piral instances using Bun.",
+  "keywords": [
+    "piral-cli",
+    "piral",
+    "plugin",
+    "bun",
+    "build",
+    "debug",
+    "bundle"
+  ],
+  "author": "smapiot",
+  "homepage": "https://piral.io",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "engines": {
+    "node": ">=12.0"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/smapiot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smapiot/piral-cli-bun.git"
+  },
+  "bugs": {
+    "url": "https://github.com/smapiot/piral-cli-bun/issues"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/yargs": "^15.0.4",
+    "piral-cli": "^1.0.0"
+  },
+  "dependencies": {
+    "cheerio": "1.0.0-rc.12",
+    "esbuild-auto-path-plugin": "^0.15.1",
+    "esbuild-codegen-plugin": "^0.15.1",
+    "esbuild-pilet-plugin": "^0.15.1",
+    "esbuild-sass-plugin": "^2.9.0"
+  }
+}
