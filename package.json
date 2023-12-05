@@ -31,5 +31,8 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^5.1.3"
+  },
+  "dependencies": {
+    "debounce": "^2.0.0"
   }
 }

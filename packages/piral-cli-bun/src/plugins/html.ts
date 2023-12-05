@@ -23,11 +23,11 @@ function isLocal(path: string) {
 
 function getName(path: string) {
   const name = filename(path);
-
   if (/\.(jsx?|tsx?)$/.test(path) && name === 'index') {
-    return 'main';
-  } else {
-    return name;
+      return 'main';
+  }
+  else {
+      return name;
   }
 }
 
