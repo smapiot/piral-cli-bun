@@ -1,6 +1,5 @@
 import type { BuildConfig } from 'bun';
-import path from 'path';
-import fs from 'fs'
+import { basename, dirname, resolve } from 'path';
 
 export function createCommonConfig(
   outdir: string,
@@ -46,14 +45,12 @@ export function createCommonConfig(
           name: "codegen-loader",
           setup(build) {
             build.onResolve({ filter: /\.codegen$/ }, async args => {
-              const codegenPath = path.resolve(path.dirname(args.importer), args.path);
-              const tempPath = path.resolve(path.dirname(codegenPath), `gen.${path.basename(codegenPath)}.js`);
+              const codegenPath = resolve(dirname(args.importer), args.path);
+              const tempPath = resolve(dirname(codegenPath), `gen.${basename(codegenPath)}.js`);
 
               try {
                   const module = await import(codegenPath);
-                  const buffer = fs.readFileSync(module.default);
-                  const content = buffer.toString()
-
+                  const content = module.default();
                   await Bun.write(tempPath, content);
               } catch (ex) {
                   console.error('Could not write', ex);

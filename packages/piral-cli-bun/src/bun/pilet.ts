@@ -2,16 +2,9 @@ import type { PiletBuildHandler, PiletSchemaVersion, SharedDependency } from 'pi
 import type { BuildConfig } from 'bun';
 import { autoPathPlugin } from 'esbuild-auto-path-plugin';
 import { piletPlugin } from 'esbuild-pilet-plugin';
-import { basename, extname } from 'path';
 import { createCommonConfig } from './common';
 import { runBun } from './bundler-run';
 import { extendConfig } from '../helpers';
-
-function nameOf(path: string) {
-  const file = basename(path);
-  const ext = extname(file);
-  return file.substring(0, file.length - ext.length);
-}
 
 function getPackageName() {
   return process.env.BUILD_PCKG_NAME;

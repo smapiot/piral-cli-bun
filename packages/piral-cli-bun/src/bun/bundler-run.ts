@@ -1,19 +1,19 @@
+import debounce from 'debounce';
 import { BuildConfig, build } from 'bun';
 import type { BundleHandlerResponse, LogLevels } from 'piral-cli';
-import * as path from 'path';
+import { dirname, resolve } from 'path';
+import { watch } from 'fs';
 import { EventEmitter } from 'events';
-import * as fs from "fs"
-import debounce from 'debounce';
 
 export function runBun(
   config: BuildConfig,
   logLevel: LogLevels,
-  watch: boolean,
+  watching: boolean,
   requireRef?: string,
 ): Promise<BundleHandlerResponse> {
   const eventEmitter = new EventEmitter();
   const rootDir = process.cwd();
-  const outDir = path.resolve(rootDir, config.outdir);
+  const outDir = resolve(rootDir, config.outdir);
   const name = `${Object.keys(config.entrypoints)[0]}.js`;
   const bundle = {
     outFile: `/${name}`,
@@ -25,21 +25,19 @@ export function runBun(
   return Promise.resolve({
     async bundle() {
       const compile = async () => {
-        console.log('Build start')
         eventEmitter.emit('start', bundle);
         await build(config);
         eventEmitter.emit('end', bundle);
-        console.log('Build end')
       };
 
       await compile();
 
-      if (watch) {
+      if (watching) {
         let promise = Promise.resolve();
         const [first] = config.entrypoints;
-        const srcDir = path.dirname(first);
+        const srcDir = dirname(first);
 
-        fs.watch(
+        watch(
           srcDir,
           {
             recursive: true,
