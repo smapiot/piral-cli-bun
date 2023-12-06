@@ -15,7 +15,7 @@ export function runBun(
   const eventEmitter = new EventEmitter();
   const rootDir = process.cwd();
   const outDir = resolve(rootDir, config.outdir);
-  const name = `${Object.keys(config.entrypoints)[0]}.js`;
+  const name = Array.isArray(config.entrypoints) ? 'index.js' : `${Object.keys(config.entrypoints)[0]}.js`;
   const bundle = {
     outFile: `/${name}`,
     outDir,
