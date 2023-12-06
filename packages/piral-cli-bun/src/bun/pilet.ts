@@ -1,9 +1,9 @@
-import type { PiletBuildHandler, PiletSchemaVersion, SharedDependency } from 'piral-cli';
+import type { PiletBuildHandler, SharedDependency } from 'piral-cli';
 import type { BuildConfig } from 'bun';
 import { autoPathPlugin } from 'esbuild-auto-path-plugin';
-import { piletPlugin } from 'esbuild-pilet-plugin';
 import { createCommonConfig } from './common';
 import { runBun } from './bundler-run';
+import { piletPlugin } from '../plugins/pilet';
 import { extendConfig } from '../helpers';
 
 function getPackageName() {
@@ -28,18 +28,13 @@ function checkSupported(schema: string): asserts schema is 'v2' | 'v3' {
 function createConfig(
   entryModule: string,
   outdir: string,
-  filename: string,
   externals: Array<string>,
-  requireRef: string,
   importmap: Array<SharedDependency> = [],
-  schema: PiletSchemaVersion,
   development = false,
   sourcemap = true,
   contentHash = true,
   minify = true,
 ): BuildConfig {
-  checkSupported(schema);
-
   const config = createCommonConfig(outdir, development, sourcemap, contentHash, minify);
   const external = [...externals, ...importmap.map((m) => m.name)];
   const entrypoints = [entryModule];
@@ -53,11 +48,7 @@ function createConfig(
     entrypoints,
     external,
     format: 'esm',
-    plugins: [
-      ...config.plugins,
-      autoPathPlugin(),
-      piletPlugin({ importmap, requireRef, name: getPackageName() }),
-    ],
+    plugins: [...config.plugins, autoPathPlugin()],
   };
 }
 
@@ -67,18 +58,22 @@ const handler: PiletBuildHandler = {
     const baseConfig = createConfig(
       options.entryModule,
       options.outDir,
-      options.outFile,
       options.externals,
-      requireRef,
       options.importmap,
-      options.version,
       options.develop,
       options.sourceMaps,
       options.contentHash,
       options.minify,
     );
+    checkSupported(options.version);
     const config = extendConfig(baseConfig, options.root);
-    return runBun(config, options.logLevel, options.watch, requireRef);
+    const postBuild = piletPlugin({
+      importmap: options.importmap,
+      requireRef,
+      schema: options.version,
+      name: getPackageName(),
+    });
+    return runBun(config, options.logLevel, options.watch, requireRef, postBuild);
   },
 };
 

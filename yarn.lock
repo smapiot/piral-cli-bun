@@ -3409,19 +3409,10 @@ error-ex@^1.3.1:
   dependencies:
     is-arrayish "^0.2.1"
 
-esbuild-auto-path-plugin@^0.15.1:
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/esbuild-auto-path-plugin/-/esbuild-auto-path-plugin-0.15.1.tgz#767c08fab8580651b32378bf0d38214b0a339bd9"
-  integrity sha512-KYAX3SH+KuxkVNkWr0oRT22V2qKDuUcLmrBHyfGxLeS4Hv/UcyUl658GM3vF8nebRtYicScJPgbWi8HAbJBG6w==
-
-esbuild-pilet-plugin@^0.15.1:
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/esbuild-pilet-plugin/-/esbuild-pilet-plugin-0.15.1.tgz#dba2159ab8f7b0ae3569064d42f89fde41b0ce0a"
-  integrity sha512-fUmkQYPNOwE/H7kAKlmXGmUdEiap75Qlj9grGD1Hdlapb0CJaeZEDZIlPou/564CQaIoeRjQD1Gesu3yIR6tAQ==
-  dependencies:
-    "@babel/cli" "^7.15.7"
-    "@babel/core" "^7.15.8"
-    "@babel/preset-env" "^7.15.8"
+esbuild-auto-path-plugin@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/esbuild-auto-path-plugin/-/esbuild-auto-path-plugin-1.0.1.tgz#9fd0fcd172a843f4e44168c5faf4b545c031af2c"
+  integrity sha512-b5glkW9LE+e54PX/GqdEEADfuLwAHcWdP2yK4nTxFhkfUnze6lCkK46E03st6L/6XsiIb0gHCptoFXR3Bvh9Yg==
 
 escalade@^3.1.1:
   version "3.1.1"

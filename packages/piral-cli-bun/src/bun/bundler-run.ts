@@ -1,6 +1,6 @@
 import debounce from 'debounce';
 import { BuildConfig, build } from 'bun';
-import type { BundleHandlerResponse, LogLevels } from 'piral-cli';
+import type { BundleHandlerResponse, BundleResult, LogLevels } from 'piral-cli';
 import { dirname, resolve } from 'path';
 import { watch } from 'fs';
 import { EventEmitter } from 'events';
@@ -10,6 +10,7 @@ export function runBun(
   logLevel: LogLevels,
   watching: boolean,
   requireRef?: string,
+  postBuild?: (bundle: BundleResult) => Promise<void>,
 ): Promise<BundleHandlerResponse> {
   const eventEmitter = new EventEmitter();
   const rootDir = process.cwd();
@@ -27,6 +28,7 @@ export function runBun(
       const compile = async () => {
         eventEmitter.emit('start', bundle);
         await build(config);
+        await postBuild?.(bundle);
         eventEmitter.emit('end', bundle);
       };
 
