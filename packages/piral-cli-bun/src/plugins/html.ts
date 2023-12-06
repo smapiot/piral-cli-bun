@@ -47,7 +47,7 @@ function extractParts(content: CheerioAPI, publicPath: string) {
     const src = script.attribs.src;
     const name = getName(src);
     files.push(src);
-    content('body').append(`<script src="${prefix}${name}.js"></script>`);
+    content('body').append(`<script src="${prefix}${name}.js" type="module"></script>`);
   }
 
   for (const sheet of sheets) {

@@ -1,5 +1,18 @@
-import type { BuildConfig } from 'bun';
+import { plugin, type BuildConfig } from 'bun';
 import { basename, dirname, resolve } from 'path';
+
+plugin({
+  name: 'codegen',
+  async setup(build) {
+    build.onLoad({ filter: /\.codegen$/ }, async (args) => {
+      const content = await Bun.file(args.path).text();
+      return {
+        contents: content.replace('module.exports = function () {', 'export default function () {'),
+        loader: 'js',
+      };
+    });
+  },
+});
 
 export function createCommonConfig(
   outdir: string,
@@ -42,25 +55,25 @@ export function createCommonConfig(
       // @todo https://github.com/smapiot/piral-cli-bun/issues/1 sassPlugin currently not supported
       // sassPlugin(),
       {
-          name: "codegen-loader",
-          setup(build) {
-            build.onResolve({ filter: /\.codegen$/ }, async args => {
-              const codegenPath = resolve(dirname(args.importer), args.path);
-              const tempPath = resolve(dirname(codegenPath), `gen.${basename(codegenPath)}.js`);
+        name: 'codegen-loader',
+        setup(build) {
+          build.onResolve({ filter: /\.codegen$/ }, async (args) => {
+            const codegenPath = resolve(dirname(args.importer), args.path);
+            const tempPath = resolve(dirname(codegenPath), `gen.${basename(codegenPath)}.js`);
 
-              try {
-                  const module = await import(codegenPath);
-                  const content = module.default();
-                  await Bun.write(tempPath, content);
-              } catch (ex) {
-                  console.error('Could not write', ex);
-              }
+            try {
+              const module = await import(codegenPath);
+              const content = module.default();
+              await Bun.write(tempPath, content);
+            } catch (ex) {
+              console.error('Could not write', ex);
+            }
 
-              return { path: tempPath };
-            });
-          },
+            return { path: tempPath };
+          });
         },
-  ],
+      },
+    ],
     target: 'browser',
     outdir,
   };
