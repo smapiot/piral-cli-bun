@@ -48,7 +48,7 @@ function createConfig(
     entrypoints,
     external,
     format: 'esm',
-    plugins: [...config.plugins, autoPathPlugin()],
+    plugins: [...config.plugins, autoPathPlugin() as any ],
   };
 }
 

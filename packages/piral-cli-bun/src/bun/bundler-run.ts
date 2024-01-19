@@ -37,16 +37,18 @@ export function runBun(
       if (watching) {
         let promise = Promise.resolve();
         const [first] = config.entrypoints;
-        const srcDir = dirname(first);
+        const srcDir = resolve(rootDir, dirname(first));
 
+        // @todo file watcher not working somehow...
         watch(
           srcDir,
           {
             recursive: true,
           },
-          debounce(() => {
+          () => {
+            console.log('changes detected, recompiling...');
             promise = promise.then(compile);
-          }, 500),
+          },
         );
       }
 
