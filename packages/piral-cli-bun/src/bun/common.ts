@@ -1,6 +1,18 @@
-import type { BuildConfig } from 'bun';
-import { sassPlugin } from 'esbuild-sass-plugin';
-import { codegenPlugin } from 'esbuild-codegen-plugin';
+import { plugin, type BuildConfig } from 'bun';
+import { basename, dirname, resolve } from 'path';
+
+plugin({
+  name: 'codegen',
+  async setup(build) {
+    build.onLoad({ filter: /\.codegen$/ }, async (args) => {
+      const content = await Bun.file(args.path).text();
+      return {
+        contents: content.replace('module.exports = function () {', 'export default function () {'),
+        loader: 'js',
+      };
+    });
+  },
+});
 
 export function createCommonConfig(
   outdir: string,
@@ -12,8 +24,8 @@ export function createCommonConfig(
   return {
     minify,
     naming: {
-      asset: contentHash ? '[name]-[hash]' : '[name]',
-      chunk: contentHash ? '[name]-[hash]' : '[name]',
+      asset: contentHash ? '[name]-[hash].[ext]' : '[name].[ext]',
+      chunk: contentHash ? '[name]-[hash].[ext]' : '[name].[ext]',
     },
     splitting: true,
     publicPath: './',
@@ -39,7 +51,29 @@ export function createCommonConfig(
       'process.env.PIRAL_CLI_VERSION': JSON.stringify(process.env.PIRAL_CLI_VERSION),
       'process.env.BUILD_TIME_FULL': JSON.stringify(process.env.BUILD_TIME_FULL),
     },
-    plugins: [sassPlugin(), codegenPlugin()],
+    plugins: [
+      // @todo https://github.com/smapiot/piral-cli-bun/issues/1 sassPlugin currently not supported
+      // sassPlugin(),
+      {
+        name: 'codegen-loader',
+        setup(build) {
+          build.onResolve({ filter: /\.codegen$/ }, async (args) => {
+            const codegenPath = resolve(dirname(args.importer), args.path);
+            const tempPath = resolve(dirname(codegenPath), `gen.${basename(codegenPath)}.js`);
+
+            try {
+              const module = await import(codegenPath);
+              const content = module.default();
+              await Bun.write(tempPath, content);
+            } catch (ex) {
+              console.error('Could not write', ex);
+            }
+
+            return { path: tempPath };
+          });
+        },
+      },
+    ],
     target: 'browser',
     outdir,
   };

@@ -22,13 +22,7 @@ function isLocal(path: string) {
 }
 
 function getName(path: string) {
-  const name = filename(path);
-
-  if (/\.(jsx?|tsx?)$/.test(path) && name === 'index') {
-    return 'main';
-  } else {
-    return name;
-  }
+  return filename(path);
 }
 
 function filename(path: string) {
@@ -53,7 +47,7 @@ function extractParts(content: CheerioAPI, publicPath: string) {
     const src = script.attribs.src;
     const name = getName(src);
     files.push(src);
-    content('body').append(`<script src="${prefix}${name}.js"></script>`);
+    content('body').append(`<script src="${prefix}${name}.js" type="module"></script>`);
   }
 
   for (const sheet of sheets) {

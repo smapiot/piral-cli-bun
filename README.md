@@ -16,27 +16,27 @@ The `piral-cli` plugin for using `bun` as bundler.
 
 ## Status
 
-- [ ] Pilets (tested / working)
-    - [ ] Codegen
-    - [ ] Bundle Splitting
-    - [ ] ESM output
-    - [ ] CSS / SASS
-    - [ ] Importmap references
-    - [ ] Importmap bundles
+- [x] Pilets (tested / working)
+    - [x] Codegen
+    - [x] Bundle Splitting
+    - [x] ESM output
+    - [x] CSS / SASS (**NO** SASS right now)
+    - [x] Importmap references
+    - [x] Importmap bundles
     - [ ] v0 format (not implemented)
     - [ ] v1 format (not implemented)
-    - [ ] v2 format
-    - [ ] tsconfig changes
-    - [ ] Building
-    - [ ] Debugging
-    - [ ] Reloading
-- [ ] Piral instances (tested / working)
-    - [ ] Codegen
-    - [ ] HTML entry point
-    - [ ] Emulator build
-    - [ ] Release build
-    - [ ] tsconfig changes
-    - [ ] Debugging
+    - [x] v2 format
+    - [x] tsconfig changes
+    - [x] Building
+    - [x] Debugging
+    - [ ] Reloading (there is a bug that `bun build` gets stuck on re-use)
+- [x] Piral instances (tested / working)
+    - [x] Codegen
+    - [x] HTML entry point
+    - [x] Emulator build
+    - [x] Release build
+    - [x] tsconfig changes
+    - [x] Debugging
     - [ ] Reloading
 
 ## License

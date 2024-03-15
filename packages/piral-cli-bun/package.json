@@ -17,7 +17,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "engines": {
-    "node": ">=12.0"
+    "node": ">=16.0"
   },
   "files": [
     "lib",
@@ -43,10 +43,11 @@
     "piral-cli": "^1.0.0"
   },
   "dependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
     "cheerio": "1.0.0-rc.12",
-    "esbuild-auto-path-plugin": "^0.15.1",
-    "esbuild-codegen-plugin": "^0.15.1",
-    "esbuild-pilet-plugin": "^0.15.1",
-    "esbuild-sass-plugin": "^2.9.0"
+    "debounce": "^2.0.0",
+    "esbuild-auto-path-plugin": "^1.0.1"
   }
 }
