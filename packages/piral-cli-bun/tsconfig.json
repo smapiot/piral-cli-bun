@@ -1,10 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./lib",
-    "moduleResolution": "bundler",
-    "module": "ES2015",
-    "esModuleInterop": true
+    "outDir": "./lib"
   },
   "include": [
     "./src"

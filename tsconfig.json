@@ -6,7 +6,7 @@
     "removeComments": false,
     "jsx": "react",
     "noLib": false,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
