@@ -18,15 +18,6 @@ There is nothing to do. Standard commands such as `piral build` or `pilet debug`
 
 This plugin comes with batteries included. You don't need to install or specify your bun version - it will use what you have installed.
 
-### What's Inside
-
-Right now it includes:
-
-- `esbuild-sass-plugin`
-- `esbuild-codegen-plugin`
-
-Additionally, most known referenced assets are handled as files.
-
 ### Customizing
 
 If you want to customize the given config (e.g., to add more plugins) then create a file *bun.config.js* in your root directory.

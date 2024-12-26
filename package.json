@@ -10,7 +10,6 @@
     "build": "lerna run build",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --project tsconfig.json",
     "prettify": "prettier --config prettier.config.js --write \"src/**/*.{ts,tsx}\"",
-    "test": "jest --forceExit --passWithNoTests",
     "prepublish": "yarn build",
     "release": "lerna publish",
     "ci:version": "node tools/changelog-version.js",
@@ -20,16 +19,13 @@
     "ci:release": "lerna publish $(yarn --silent ci:version) --yes --force-publish --message '[skip ci] publish %s'"
   },
   "devDependencies": {
-    "@types/node": "18.11.18",
-    "bun-types": "^1.0.0",
-    "jest": "^25.0.0",
-    "jest-cli": "^25.0.0",
-    "lerna": "^6.0.3",
+    "@types/node": "^18",
+    "bun-types": "^1",
+    "lerna": "^6",
     "prettier": "^2.1.1",
-    "ts-jest": "^25.0.0",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^5.1.3"
+    "typescript": "^5"
   }
 }

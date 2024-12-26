@@ -35,18 +35,17 @@
     "url": "https://github.com/smapiot/piral-cli-bun/issues"
   },
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "tsc"
   },
   "devDependencies": {
-    "@types/yargs": "^15.0.4",
-    "piral-cli": "^1.0.0"
+    "@types/yargs": "^17",
+    "piral-cli": "1.7.3"
   },
   "dependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
-    "cheerio": "1.0.0-rc.12",
+    "cheerio": "1.0.0",
     "debounce": "^2.0.0",
     "esbuild-auto-path-plugin": "^1.0.1"
   }

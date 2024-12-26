@@ -18,7 +18,7 @@ variables:
 - name: canaryBranch
   value: 'experimental'
 - name: nodeVersion
-  value: '18.16.0'
+  value: '20.12.2'
 
 stages:
 - stage: Build
@@ -47,9 +47,9 @@ stages:
       inputs:
         Arguments: setup
     - task: Yarn@2
-      displayName: Test Code
+      displayName: Test Build
       inputs:
-        Arguments: test
+        Arguments: build
 
 - stage: CanaryRelease
 
