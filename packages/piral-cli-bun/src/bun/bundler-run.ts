@@ -1,9 +1,8 @@
-import debounce from 'debounce';
 import { BuildConfig, build } from 'bun';
-import type { BundleHandlerResponse, BundleResult, LogLevels } from 'piral-cli';
 import { dirname, resolve } from 'path';
 import { watch } from 'fs';
 import { EventEmitter } from 'events';
+import type { BundleHandlerResponse, BundleResult, LogLevels } from 'piral-cli';
 
 export function runBun(
   config: BuildConfig,

@@ -45,6 +45,7 @@
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
+    "bun-codegen-loader": "2.1.0-pre.8",
     "cheerio": "1.0.0",
     "debounce": "^2.0.0",
     "esbuild-auto-path-plugin": "^1.0.1"

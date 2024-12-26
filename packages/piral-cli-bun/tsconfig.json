@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./lib",
-    "moduleResolution": "Node16",
-    "module": "Node16",
+    "moduleResolution": "bundler",
+    "module": "ES2015",
     "esModuleInterop": true
   },
   "include": [

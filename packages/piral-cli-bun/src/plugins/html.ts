@@ -1,5 +1,5 @@
 import type { BunPlugin } from 'bun';
-import { load, Element, CheerioAPI } from 'cheerio';
+import { load, CheerioAPI } from 'cheerio';
 import { mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { basename, dirname, extname, resolve } from 'path';
 
@@ -33,13 +33,13 @@ function filename(path: string) {
 
 function extractParts(content: CheerioAPI, publicPath: string) {
   const sheets = content('link[href][rel=stylesheet]')
-    .filter((_, e: Element) => isLocal(e.attribs.href))
+    .filter((_, e) => isLocal(e.attribs.href))
     .remove()
-    .toArray() as Array<Element>;
+    .toArray();
   const scripts = content('script[src]')
-    .filter((_, e: Element) => isLocal(e.attribs.src))
+    .filter((_, e) => isLocal(e.attribs.src))
     .remove()
-    .toArray() as Array<Element>;
+    .toArray();
   const files = [];
   const prefix = publicPath.endsWith('/') ? publicPath : `${publicPath}/`;
 
