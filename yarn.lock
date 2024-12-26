@@ -1989,10 +1989,10 @@ builtins@^5.0.0:
   dependencies:
     semver "^7.0.0"
 
-bun-codegen-loader@2.1.0-pre.9:
-  version "2.1.0-pre.9"
-  resolved "https://registry.yarnpkg.com/bun-codegen-loader/-/bun-codegen-loader-2.1.0-pre.9.tgz#327e1017c7ebf88255ad0cd44b4b40ecaffde9fe"
-  integrity sha512-Dw8Wwtz6wR2gq4HfITMwtNs7hDfHR3d0yQvZuJJgcvs40S0wJoYYsB9kksiSh6mm8RlzHKmbqIrVJ9c7T+jiCg==
+bun-codegen-loader@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/bun-codegen-loader/-/bun-codegen-loader-2.1.0.tgz#e49adb3ecff4eeea6c11873ba3d438174710ce84"
+  integrity sha512-z9Xcul5snwIpFSkDrKCWt7kVPI6wIgKHkQa9KmWpn3gFu+/4u7/1jFoE2Qq395YYbwMXxV7P6QDOSltvaIpFrQ==
 
 bun-types@^1:
   version "1.1.42"
